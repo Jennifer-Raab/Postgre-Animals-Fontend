@@ -1,0 +1,164 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+a {
+  text-decoration: none;
+}
+#root {
+  min-height: 100vh;
+}
+body {
+  background-color: #2b193d;
+  color: #eee0cb;
+  font-size: 15px;
+  line-height: 23px;
+  font-weight: 300;
+}
+main {
+  min-height: calc(100% - 442px);
+}
+main,
+header > div,
+footer > div {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1024px;
+}
+header {
+  background-color: #004f2d;
+}
+footer {
+  background-color: #004f2d;
+}
+footer > div > div > nav > a {
+  display: block;
+}
+h1 {
+  font-size: 3rem;
+  line-height: 1.6em;
+  font-weight: 700;
+  text-align: center;
+  padding: 3vh;
+}
+h4 {
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1.6em;
+}
+th {
+  text-align: left;
+  padding-right: 10px;
+  vertical-align: top;
+}
+table,
+.animal-behaviour {
+  font-size: 1.2rem;
+  margin-top: 3vh;
+  line-height: 1.6em;
+}
+.footer-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.animal-flex,
+.header-flex {
+  display: flex;
+  align-items: center;
+}
+.header-flex {
+  justify-content: space-between;
+}
+.header-link {
+  font-size: 1.5rem;
+}
+.logo {
+  width: 150px;
+  height: auto;
+  margin: -20px 0;
+}
+.button {
+  width: 150px;
+  height: auto;
+}
+.animal-flex > * {
+  width: 50% !important;
+  margin-top: 2.5em;
+}
+.animal-list {
+  display: flex;
+  row-gap: 2.5rem;
+  column-gap: 5%;
+  flex-wrap: wrap;
+}
+.animal-picture {
+  width: 100%;
+  height: auto;
+}
+.animal-card {
+  width: 30%;
+  position: relative;
+  font-size: 1.5rem;
+}
+.animal-card img {
+  display: block;
+}
+
+.animal-card > a > p {
+  padding: 10px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+.pad5vh {
+  padding: 2.5rem 0;
+}
+
+@media only screen and (max-width: 1023px) {
+  .animal-flex {
+    display: block;
+  }
+  .animal-flex > * {
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .animal-list {
+    column-gap: 10%;
+  }
+  .animal-card {
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 566px) {
+  .animal-card {
+    width: 100%;
+  }
+
+  .header-link {
+    display: none;
+  }
+}
+
+/* Static Footer */
+
+html, body {
+  height: 100%;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+}
