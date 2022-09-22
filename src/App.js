@@ -1,6 +1,5 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { client } from "./Components/client";
 import "./App.css";
 import GattungsListe from "./Components/GattungsListe";
 import logo from "./graphics/tierlexikon-logo.png";
@@ -12,47 +11,46 @@ import TierklassenNavigation from "./Components/TierklassenNavigation";
 
 export default function App() {
   const [animals, setAnimals] = useState([]);
-  useEffect(() => {
-    client
-      .getEntries()
-      .then((response) => setAnimals(response.items))
-      .catch(console.error);
-  }, []);
 
-  console.log("Animals in App", animals);
+  const API = "https://postgre-animals-backend.onrender.com/animals";
+
+  useEffect(() => {
+    fetch(API)
+      .then((response) => response.json())
+      .then((data) => setAnimals(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
-    <div className="content">
+      <div className="content">
+        <header className="pad5vh">
+          <div className="header-flex">
+            <NavLink to="/">
+              <img src={logo} alt="Tierlexikon" className="logo" />
+            </NavLink>
+            <NavLink className={"header-link"} to="/">
+              Übersicht
+            </NavLink>
+            <img src={spendenbutton} alt="Spenden" className="button" />
+          </div>
+        </header>
+        <main className="pad5vh">
+          <Routes>
+            <Route path="/" element={<Animals animals={animals} />} />
+            <Route path="animal/:id" element={<Animal animals={animals} />} />
+            <Route
+              path="tierklassenliste/:suchwort"
+              element={<Tierklassenliste animals={animals} />}
+            />
+            <Route
+              path="gattung/:suchwort"
+              element={<GattungsListe animals={animals} />}
+            />
+          </Routes>
+        </main>
+      </div>
 
-    <header className="pad5vh">
-        <div className="header-flex">
-          <NavLink to="/">
-            <img src={logo} alt="Tierlexikon" className="logo" />
-          </NavLink>
-          <NavLink className={"header-link"} to="/">
-            Übersicht
-          </NavLink>
-          <img src={spendenbutton} alt="Spenden" className="button" />
-        </div>
-      </header>
-      <main className="pad5vh">
-        <Routes>
-          <Route path="/" element={<Animals animals={animals} />} />
-          <Route path="animal/:id" element={<Animal animals={animals} />} />
-          <Route
-            path="tierklassenliste/:suchwort"
-            element={<Tierklassenliste animals={animals} />}
-          />
-          <Route
-            path="gattung/:suchwort"
-            element={<GattungsListe animals={animals} />}
-          />
-        </Routes>
-      </main>
-
-    </div>
-     
       <footer className="pad5vh">
         <div className="footer-flex">
           <div>
@@ -74,7 +72,7 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Jenni
+                Jenny
               </a>
               <a
                 href="https://github.com/rol423"

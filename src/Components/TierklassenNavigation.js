@@ -4,8 +4,8 @@ export default function TierklassenNavigation({ animals }) {
   const tierklassen = [];
   if (animals.length) {
     for (let i = 0; i < animals.length; i++) {
-      if (tierklassen.indexOf(animals[i].fields.tierklasse) === -1) {
-        tierklassen.push(animals[i].fields.tierklasse);
+      if (tierklassen.indexOf(animals[i].tierklasse) === -1) {
+        tierklassen.push(animals[i].tierklasse);
       }
     }
     return (
@@ -13,11 +13,12 @@ export default function TierklassenNavigation({ animals }) {
         {tierklassen.length &&
           tierklassen.map((tierklasse) => {
             return (
-              <Link to={`/tierklassenliste/${tierklasse}`}>{tierklasse}</Link>
+              <Link key={tierklasse} to={`/tierklassenliste/${tierklasse}`}>
+                {tierklasse}
+              </Link>
             );
           })}
       </nav>
     );
   }
-  console.log(tierklassen);
 }

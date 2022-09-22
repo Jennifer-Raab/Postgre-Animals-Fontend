@@ -5,31 +5,26 @@ import { stamenTerrain } from "pigeon-maps/providers";
 function Animal({ animals }) {
   const { id } = useParams();
 
-  console.log("Animals: ", animals);
-
-  const animal =
-    animals.length && animals.find((animal) => id === animal.sys.id);
+  const animal = animals.length && animals.find((animal) => id == animal.id);
 
   return (
     <div className="animal-single">
       {animal ? (
         <>
           <nav>
-            <Link to={`/tierklassenliste/${animal.fields.tierklasse}`}>
-              {animal.fields.tierklasse}
+            <Link to={`/tierklassenliste/${animal.tierklasse}`}>
+              {animal.tierklasse}
             </Link>{" "}
             &#10132;{" "}
-            <Link to={`/gattung/${animal.fields.gattung}`}>
-              {animal.fields.gattung}
-            </Link>{" "}
-            &#10132; {animal.fields.tierart}
+            <Link to={`/gattung/${animal.gattung}`}>{animal.gattung}</Link>{" "}
+            &#10132; {animal.tierart}
           </nav>
-          <h1>{animal.fields.tierart}</h1>
+          <h1>{animal.tierart}</h1>
           <div>
             <img
               className="animal-picture"
-              src={animal.fields.bild.fields.file.url}
-              alt={animal.fields.bild.fields.description}
+              src={animal.bild}
+              alt={animal.tierart}
             />
           </div>
           <div className="animal-flex">
@@ -37,38 +32,37 @@ function Animal({ animals }) {
               <tbody>
                 <tr>
                   <th>Tierklasse:</th>
-                  <td>{animal.fields.tierklasse}</td>
+                  <td>{animal.tierklasse}</td>
                 </tr>
                 <tr>
                   <th>Gattung:</th>
-                  <td>{animal.fields.gattung}</td>
+                  <td>{animal.gattung}</td>
                 </tr>
                 <tr>
                   <th>Größe:</th>
                   <td>
-                    {animal.fields.mingroesse.toString().replace(".", ",")} -{" "}
-                    {animal.fields.maxgroesse.toString().replace(".", ",")}{" "}
-                    Meter
+                    {animal.mingroesse.toString().replace(".", ",")} -{" "}
+                    {animal.maxgroesse.toString().replace(".", ",")} Meter
                   </td>
                 </tr>
                 <tr>
                   <th>Gewicht:</th>
                   <td>
-                    {animal.fields.mingewicht.toString().replace(".", ",")} -{" "}
-                    {animal.fields.maxgewicht.toString().replace(".", ",")} Kilo
+                    {animal.mingewicht.toString().replace(".", ",")} -{" "}
+                    {animal.maxgewicht.toString().replace(".", ",")} Kilo
                   </td>
                 </tr>
                 <tr>
                   <th>Lebenserwartung:</th>
-                  <td>{animal.fields.lebenserwartung} Jahre</td>
+                  <td>{animal.lebenserwartung} Jahre</td>
                 </tr>
                 <tr>
                   <th>Lebensraum:</th>
-                  <td>{animal.fields.lebensraum.join(", ")}</td>
+                  <td>{JSON.parse(animal.lebensraum).join(", ")}</td>
                 </tr>
                 <tr>
                   <th>Schutzstatus:</th>
-                  <td>{animal.fields.schutzstatus}</td>
+                  <td>{animal.schutzstatus}</td>
                 </tr>
               </tbody>
             </table>
@@ -76,23 +70,19 @@ function Animal({ animals }) {
               provider={stamenTerrain}
               height={227.03}
               defaultCenter={[
-                animal.fields.herkunftsland.lat,
-                animal.fields.herkunftsland.lon,
+                animal.herkunftsland_lat,
+                animal.herkunftsland_lng,
               ]}
               defaultZoom={3.7}
             >
               <Marker
                 width={50}
-                anchor={[
-                  animal.fields.herkunftsland.lat,
-                  animal.fields.herkunftsland.lon,
-                ]}
+                anchor={[animal.herkunftsland_lat, animal.herkunftsland_lng]}
               />
             </Map>
-            {console.log(animal.fields.herkunftsland.lon)}
           </div>
           <div className="animal-behaviour">
-            {animal.fields.verhalten
+            {animal.verhalten
               .split("\n")
               .reduce((children, textSegment, index) => {
                 return [
