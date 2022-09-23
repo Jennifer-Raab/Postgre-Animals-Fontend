@@ -5,7 +5,8 @@ import { stamenTerrain } from "pigeon-maps/providers";
 function Animal({ animals }) {
   const { id } = useParams();
 
-  const animal = animals.length && animals.find((animal) => id == animal.id);
+  const animal =
+    animals.length && animals.find((animal) => parseInt(id) === animal.id);
 
   return (
     <div className="animal-single">
