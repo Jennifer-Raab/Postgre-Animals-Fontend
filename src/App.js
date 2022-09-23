@@ -10,6 +10,7 @@ import Animal from "./Components/Animal";
 import TierklassenNavigation from "./Components/TierklassenNavigation";
 
 export default function App() {
+  console.log("Test");
   const [animals, setAnimals] = useState([]);
 
   const API = "https://postgre-animals-backend.onrender.com/animals";
