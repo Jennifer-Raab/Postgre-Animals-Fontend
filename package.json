@@ -1,5 +1,6 @@
 {
   "name": "lexikon-der-tiere",
+  "homepage": "https://jennifer-raab.github.io/Postgre-Animals-Fontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
